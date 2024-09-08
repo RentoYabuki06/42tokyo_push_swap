@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 13:17:49 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/08 13:46:23 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/08 17:38:33 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int ft_fill_stack(t_stack **stack, int argc, char **argv)
 	while (i < argc)
 	{
 		num = ft_atoi_pushswap(argv[i]);
-		if (num == 0 && ft_strcmp(argv[i], "0") != 0)
+		if (num == 0 && ft_strncmp(argv[i], "0", 1) != 0)
 			return (0);
 		node = (t_node *)malloc(sizeof(t_node));
 		if (!node)

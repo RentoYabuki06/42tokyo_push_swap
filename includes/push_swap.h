@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 21:15:40 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/08 15:54:09 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/08 18:05:35 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_rr(t_stack **stack_a, t_stack **stack_b);
 void	ft_rra(t_stack **stack_a);
 void	ft_rrb(t_stack **stack_b);
 void	ft_rrr(t_stack **stack_a, t_stack **stack_b);
-
+void	ft_rotate(t_stack **stack);
 int		ft_atoi_pushswap(const char *str);
 int		ft_check(int argc, char **argv);
 void	ft_free_stack(t_stack **stack);

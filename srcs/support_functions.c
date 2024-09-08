@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 13:06:51 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/08 13:17:09 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/08 17:42:55 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	ft_atoi_pushswap(const char *str)
 	int			sign;
 	long long	ans;
 
+	i = 0;
 	ans = 0;
 	sign = 1;
 	if (str[i] == '+')

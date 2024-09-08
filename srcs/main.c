@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:26:06 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/08 15:54:13 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/08 18:05:25 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	ft_is_sorted(t_stack **stack)
 
 static void	ft_push_swap(t_stack **stack_a, t_stack **stack_b)
 {
-	if (ft_is_sorted(*stack_a))
+	if (ft_is_sorted(stack_a))
 		return ;
 	if ((*stack_a)->size == 2)
 	{
