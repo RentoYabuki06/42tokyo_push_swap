@@ -6,67 +6,48 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:26:06 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/08 13:12:25 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/08 15:02:48 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static void ft_free_stack(t_stack **stack)
+static int	ft_is_sorted(t_stack **stack)
 {
-	t_node *cur_node;
-	t_node *next_node;
+	t_node	*cur_node;
 
-	if (!stack || !(*stack))
-		return ;
+	if (!(*stack) || !(*stack)->top)
+		return (0);
 	cur_node = (*stack)->top;
-	while (cur_node)
+	while (cur_node->next)
 	{
-		next_node = cur_node->next;
-		free(cur_node);
-		cur_node = next_node;
-	}
-	free(*stack);
-	*stack = NULL;
-}
-
-static t_stack	*ft_init_stack(void)
-{
-	t_stack	*stack;
-
-	stack = (t_stack *)malloc(sizeof(t_stack));
-	if (!stack)
-		return (NULL);
-	stack->top = NULL;
-	stack->bottom = NULL;
-	stack->size = 0;
-	return (stack);
-}
-
-static int ft_fill_stack(t_stack **stack, int argc, char **argv)
-{
-	int i;
-	int num;
-	t_node *node;
-
-	i = 1;
-	while (i < argc)
-	{
-		num = ft_atoi(argv[i]);
-		if (num == 0 && ft_strcmp(argv[i], "0") != 0)
+		if (cur_node->value > cur_node->next->value)
 			return (0);
-		node = (t_node *)malloc(sizeof(t_node));
-		if (!node)
-			return (0);
-		node->value = num;
-		node->next = (*stack)->top;
-		(*stack)->top = node;
-		if (!(*stack)->bottom)
-			(*stack)->bottom = node;
-		(*stack)->size++;
-		i++;
+		cur_node = cur_node->next;
 	}
 	return (1);
+}
+
+static void	ft_push_swap(t_stack **stack_a, t_stack **stack_b)
+{
+	if (ft_is_sorted(*stack_a))
+		return ;
+	if ((*stack_a)->size == 2)
+	{
+		ft_sa(stack_a);
+		return ;
+	}
+	if ((*stack_a)->size == 3)
+	{
+		ft_sort_three(stack_a);
+		return ;
+	}
+	if ((*stack_a)->size == 5)
+	{
+		ft_sort_five(stack_a, stack_b);
+		return ;
+	}
+	ft_sort_large(stack_a, stack_b);
 }
 
 int main(int argc, char **argv)
@@ -82,7 +63,7 @@ int main(int argc, char **argv)
 		return (0);
 	if (!ft_fill_stack(&stack_a, argc, argv))
 		return (0);
-	ft_sort(&stack_a, &stack_b);
+	ft_push_swap(&stack_a, &stack_b);
 	ft_free_stack(&stack_a);
 	ft_free_stack(&stack_b);
 	return (0);

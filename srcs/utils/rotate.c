@@ -6,11 +6,11 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:01:09 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/08 10:17:29 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/08 13:39:00 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../../includes/push_swap.h"
 
 static void	ft_rotate(t_stack **stack)
 {
