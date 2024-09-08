@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:26:06 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/08 10:34:29 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/08 13:12:25 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int main(int argc, char **argv)
 		return (0);
 	stack_a = ft_init_stack();
 	stack_b = ft_init_stack();
+	if (!ft_check(argc, argv))
+		return (0);
 	if (!ft_fill_stack(&stack_a, argc, argv))
 		return (0);
 	ft_sort(&stack_a, &stack_b);
