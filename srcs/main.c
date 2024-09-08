@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:26:06 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/08 15:02:48 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/08 15:54:13 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	ft_push_swap(t_stack **stack_a, t_stack **stack_b)
 		ft_sort_five(stack_a, stack_b);
 		return ;
 	}
-	ft_sort_large(stack_a, stack_b);
+	ft_sort_large(stack_a, stack_b, 0, (*stack_a)->size - 1);
 }
 
 int main(int argc, char **argv)

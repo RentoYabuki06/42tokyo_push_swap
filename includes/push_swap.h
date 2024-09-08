@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 21:15:40 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/08 15:02:40 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/08 15:54:09 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ t_stack	*ft_init_stack(void);
 int		ft_fill_stack(t_stack **stack, int argc, char **argv);
 void	ft_sort_three(t_stack **stack);
 void	ft_sort_five(t_stack **stack_a, t_stack **stack_b);
-void	ft_sort_large(t_stack **stack_a, t_stack **stack_b);
+void	ft_sort_large(t_stack **stack_a, t_stack **stack_b, int left, int right);
 
 #endif
