@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:04:33 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/08 13:44:05 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/15 09:57:18 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,18 @@ static void ft_reverse_rotate(t_stack **stack)
 void	ft_rra(t_stack **stack_a)
 {
 	ft_reverse_rotate(stack_a);
-	ft_putstr_fd("ra\n", 1);
+	ft_printf("rra\n");
 }
 
 void	ft_rrb(t_stack **stack_b)
 {
 	ft_reverse_rotate(stack_b);
-	ft_putstr_fd("rb\n", 1);
+	ft_printf("rrb\n");
 }
 
 void	ft_rrr(t_stack **stack_a, t_stack **stack_b)
 {
 	ft_reverse_rotate(stack_a);
 	ft_rotate(stack_b);
-	ft_putstr_fd("rr\n", 1);
+	ft_printf("rrr\n");
 }

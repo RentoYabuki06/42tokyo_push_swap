@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 21:20:57 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/08 17:37:41 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/15 09:57:58 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@ static void    ft_swap(t_stack **stack)
 void    ft_sa(t_stack **stack_a)
 {
 	ft_swap(stack_a);
-	ft_putstr_fd("sa\n", 1);
+	ft_printf("sa\n");
 }
 
 void    ft_sb(t_stack **stack_b)
 {
 	ft_swap(stack_b);
-	ft_putstr_fd("sb\n", 1);
+	ft_printf("sb\n");
 }
 
 void   ft_ss(t_stack **stack_a, t_stack **stack_b)
 {
 	ft_swap(stack_a);
 	ft_swap(stack_b);
-	ft_putstr_fd("ss\n", 1);
+	ft_printf("ss\n");
 }

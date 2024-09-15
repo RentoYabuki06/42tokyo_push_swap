@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 21:15:40 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/14 12:00:02 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/15 15:49:03 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 # define PUSH_SWAP_H
 
 # include "../srcs/libft/libft.h"
+# include "../srcs/ft_printf/ft_printf.h"
+# include <stdbool.h>
 
 typedef struct s_node
 {
 	int value;
 	struct s_node *next;
+	struct s_node *prev;
 } t_node;
 
 typedef struct s_stack {
@@ -39,8 +42,7 @@ void	ft_rra(t_stack **stack_a);
 void	ft_rrb(t_stack **stack_b);
 void	ft_rrr(t_stack **stack_a, t_stack **stack_b);
 void	ft_rotate(t_stack **stack);
-int		ft_atoi_pushswap(const char *str);
-int		ft_init_check(int argc, char **argv);
+
 void	ft_free_stack(t_stack **stack);
 t_stack	*ft_init_stack(void);
 int		ft_fill_stack(t_stack **stack, int argc, char **argv);

@@ -1,41 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_large.c                                       :+:      :+:    :+:   */
+/*   node.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/08 14:51:01 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/15 09:05:16 by ryabuki          ###   ########.fr       */
+/*   Created: 2024/09/15 12:57:35 by ryabuki           #+#    #+#             */
+/*   Updated: 2024/09/15 13:09:15 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void ft_sort_large(t_stack **stack_a, t_stack **stack_b, int left, int right)
+void	ft_print_stack(t_stack **stack)
 {
-	int pivot;
-	int i;
-	int j;
+	t_node	*tmp;
 
-	if (left >= right)
-		return ;
-	pivot = (*stack_a)->top->value;
-	i = left;
-	j = right;
-	while (i <= j)
+	if ((*stack)->size == 0)
 	{
-		while ((*stack_a)->top->value < pivot)
-			ft_ra(stack_a);
-		while ((*stack_a)->top->value > pivot)
-			ft_rra(stack_a);
-		if (i <= j)
-		{
-			ft_sa(stack_a);
-			i++;
-			j--;
-		}
+		ft_printf("note : This stack is empty!");
+		return ;
 	}
-	ft_sort_large(stack_a, stack_b, left, j);
-	ft_sort_large(stack_a, stack_b, i, right);
+	ft_printf("-----  Printing Stack (Top to Down)  -------\n");
+	tmp = ((*stack)->top);
+	while (TRUE)
+	{
+		ft_printf("[%d]\n", tmp->value);
+		tmp = tmp->next;
+		if (tmp != (*stack)->bottom)
+			break ;
+	}
+	ft_printf("--------  Finish!!  -------\n");
 }
