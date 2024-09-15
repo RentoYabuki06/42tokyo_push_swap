@@ -6,13 +6,13 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 13:17:49 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/08 17:38:33 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/14 11:59:41 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int ft_check(int argc, char **argv)
+int ft_init_check(int argc, char **argv)
 {
 	int i;
 	int j;
