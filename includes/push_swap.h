@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 21:15:40 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/15 15:49:03 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/18 19:33:34 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ void	ft_rotate(t_stack **stack);
 
 void	ft_free_stack(t_stack **stack);
 t_stack	*ft_init_stack(void);
-int		ft_fill_stack(t_stack **stack, int argc, char **argv);
+void	ft_print_stack(t_stack **stack);
+int		ft_fill_stack(t_stack **stack, int argc, char **argv, bool issplit);
 void	ft_sort_three(t_stack **stack);
-void	ft_sort_five(t_stack **stack_a, t_stack **stack_b);
-void	ft_sort_large(t_stack **stack_a, t_stack **stack_b, int left, int right);
+void	ft_sort_five(t_stack **stack_a, t_stack **stack_b, int min, int max);
+void	ft_sort_large(t_stack **stack_a, t_stack **stack_b);
+void	ft_print_argv(char **argv);
 
 #endif

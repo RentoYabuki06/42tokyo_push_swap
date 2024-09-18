@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:33:35 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/15 15:51:28 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/18 18:04:28 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,24 +65,29 @@ void	ft_sort_three(t_stack **stack)
 		ft_rra(stack);
 }
 
-void	ft_sort_five(t_stack **stack_a, t_stack **stack_b)
+void	ft_sort_five(t_stack **stack_a, t_stack **stack_b, int size, int pushed)
 {
-	int		min;
-	int		max;
-	int		i;
+	int	min;
+	int max;
 
 	min = ft_find_min((*stack_a)->top);
 	max = ft_find_max((*stack_a)->top);
-	i = 0;
-	while (i < 2)
+	while (size - pushed > 3)
 	{
-		if ((*stack_a)->top->value == min || (*stack_a)->top->value == max)
+		if ((*stack_a)->top->value == min || (size == 5 && (*stack_a)->top->value == max))
+		{
 			ft_pb(stack_a, stack_b);
+			pushed++;
+		}
 		else
 			ft_ra(stack_a);
-		i++;
 	}
 	ft_sort_three(stack_a);
-	ft_pa(stack_a, stack_b);
-	ft_pa(stack_a, stack_b);
+	while (pushed > 0)
+	{
+		ft_pa(stack_a, stack_b);
+		pushed--;
+		if ((*stack_a)->top->value == max)
+			ft_ra(stack_a);
+	}
 }

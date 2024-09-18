@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 13:06:51 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/15 16:38:59 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/18 19:38:11 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,39 +82,52 @@ static bool	ft_check_duplicates(t_stack **stack, int num)
 	return (false);
 }
 
-int ft_fill_stack(t_stack **stack, int argc, char **argv)
+int ft_fill_stack(t_stack **stack, int argc, char **argv, bool issplit)
 {
-	int		i;
-	int		num;
-	t_node	*node;
+    int     i;
+    int     num;
+    t_node  *node;
+	(void)	argc;
 
-	i = 1;
-	while (i < argc)
-	{
-		num = ft_atoi_pushswap(argv[i]);
-		if (num == 0 && !ft_is_zero(argv[i]))
-		{
-			ft_printf("---- atoi failed!  -----\n"); // test
-			return (0);
-		}
-		if (ft_check_duplicates(stack, num))
-		{
-			ft_printf("---- duplicated!  -----\n"); // test
-			return (0);
-		}
-		node = (t_node *)malloc(sizeof(t_node));
-		if (!node)
-		{
-			ft_printf("---- node malloc failed!  -----\n"); // test
-			return (0);
-		}
-		node->value = num;
-		node->next = (*stack)->top;
-		(*stack)->top = node;
-		if (!(*stack)->bottom)
-			(*stack)->bottom = node;
-		(*stack)->size++;
-		i++;
-	}
-	return (1);
+    i = 1; // 後で調整します
+    if (issplit)
+        i = 0; // `ft_split` 後の引数配列はインデックス0から始まる
+
+    while (argv[i])
+    {
+        num = ft_atoi_pushswap(argv[i]);
+        if (num == 0 && !ft_is_zero(argv[i]))
+        {
+            ft_printf("---- atoi failed!  -----\n"); // テスト用
+            return (0);
+        }
+        if (ft_check_duplicates(stack, num))
+        {
+            ft_printf("---- duplicated!  -----\n"); // テスト用
+            return (0);
+        }
+        node = (t_node *)malloc(sizeof(t_node));
+        if (!node)
+        {
+            ft_printf("---- node malloc failed!  -----\n"); // テスト用
+            return (0);
+        }
+        node->value = num;
+        node->next = NULL;
+        if ((*stack)->top == NULL)
+        {
+            // スタックが空の場合
+            (*stack)->top = node;
+            (*stack)->bottom = node;
+        }
+        else
+        {
+            // スタックが空でない場合
+            (*stack)->bottom->next = node;
+            (*stack)->bottom = node;
+        }
+        (*stack)->size++;
+        i++;
+    }
+    return (1);
 }
