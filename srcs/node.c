@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   node.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 12:57:35 by ryabuki           #+#    #+#             */
-/*   Updated: 2024/09/18 19:37:02 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/19 23:43:25 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ void	ft_print_stack(t_stack **stack)
 	ft_printf("--------  Finish!!  -------\n");
 }
 
-void	ft_print_argv(char **argv)
-{
-	int	i;
+// void	ft_print_argv(char **argv)
+// {
+// 	int	i;
 
-	i = 0;
-	while(argv[i])
-	{
-		ft_printf("[%d] of argv is [%s]\n" , i, argv[i]);
-		i++;
-	}
-	return ;
-}
+// 	i = 0;
+// 	while(argv[i])
+// 	{
+// 		ft_printf("[%d] of argv is [%s]\n" , i, argv[i]);
+// 		i++;
+// 	}
+// 	return ;
+// }

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:04:56 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/15 09:56:36 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/19 23:42:55 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-static void   ft_push(t_stack **from, t_stack **to)
+static void	ft_push(t_stack **from, t_stack **to)
 {
-	t_node *tmp;
+	t_node	*tmp;
 
 	if (!(*from) || !(*to) || (*from)->size == 0)
 		return ;

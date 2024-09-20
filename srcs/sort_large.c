@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   sort_large.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 14:51:01 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/18 18:34:50 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/20 00:00:01 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
+// スタックの値を配列にコピーする関数
 static void copy_stack_to_array(t_stack *stack, int size, int *array)
 {
     t_node *current = stack->top;
@@ -38,13 +39,13 @@ static void quicksort_array(int *array, int low, int high)
             if (array[j] <= pivot)
             {
                 i++;
-                // swap array[i] and array[j]
+                // array[i]とarray[j]を交換
                 temp = array[i];
                 array[i] = array[j];
                 array[j] = temp;
             }
         }
-        // swap array[i+1] and array[high]
+        // array[i+1]とarray[high]を交換
         temp = array[i + 1];
         array[i + 1] = array[high];
         array[high] = temp;
@@ -84,53 +85,60 @@ static int get_pivot_value(t_stack *stack, int size)
     return pivot;
 }
 
-
+// スタックをクイックソートする関数
 static void ft_quicksort_stack(t_stack **stack_a, t_stack **stack_b, int size)
 {
-    if (size <= 1 || stack_a == NULL || *stack_a == NULL)
+    if (size <= 1 || stack_a == NULL || *stack_a == NULL || (*stack_a)->top == NULL)
         return;
 
     int pivot = get_pivot_value(*stack_a, size);
-    int i = 0;
-    int pushed = 0;
+    int num_pushed = 0;
+    int num_rotated = 0;
+    int current_size = size;
 
     // パーティションフェーズ
-    while (i < size)
+    while (current_size > 0)
     {
+        if ((*stack_a)->top == NULL)
+            break;
+
         if ((*stack_a)->top->value < pivot)
         {
             ft_pb(stack_a, stack_b); // ピボット未満の要素をstack_bにプッシュ
-            pushed++;
+            num_pushed++;
         }
         else
         {
             ft_ra(stack_a); // ピボット以上の要素を後方に回転
+            num_rotated++;
         }
-        i++;
+        current_size--;
     }
 
+    // 回転した要素を元に戻す
+    while (num_rotated--)
+    {
+        ft_rra(stack_a);
+    }
+
+    // 再帰的にソート（ピボット以上の部分）
+    int sorted_size = size - num_pushed;
+    ft_quicksort_stack(stack_a, stack_b, sorted_size);
+
     // 再帰的にソート（ピボット未満の部分）
-    ft_quicksort_stack(stack_b, stack_a, pushed);
+    ft_quicksort_stack(stack_b, stack_a, num_pushed);
 
     // stack_bから要素を戻す
-    while (pushed--)
+    while (num_pushed--)
     {
         ft_pa(stack_a, stack_b);
     }
-
-    // ピボット以上の部分のサイズを計算
-    int sorted_size = size - pushed;
-
-    // 再帰的にソート（ピボット以上の部分）
-    ft_quicksort_stack(stack_a, stack_b, sorted_size);
 }
 
 // ソートを開始する関数
 void ft_sort_large(t_stack **stack_a, t_stack **stack_b)
 {
     int size = (*stack_a)->size;
-    ft_quicksort_stack(stack_a, stack_b, size);
 
-    // メモリの解放
-    free(stack_b);
+    ft_quicksort_stack(stack_a, stack_b, size);
 }
