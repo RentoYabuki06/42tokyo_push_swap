@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 13:17:49 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/20 17:07:19 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/20 21:24:13 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ void	ft_free_all(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
 	ft_free_stack(stack_b);
 	if (!cmndlist || !(*cmndlist))
 		return ;
+	ft_lstclear(cmndlist, free);
 	*cmndlist = NULL;
 }

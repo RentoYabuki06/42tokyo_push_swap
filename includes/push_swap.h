@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 21:15:40 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/20 17:25:14 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/20 21:23:27 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	ft_swap(t_stack **stack);
 int		ft_atoi_ps(char *s, t_stack **stack_a, \
 	t_stack **stack_b, t_list **cmndlist);
 int		ft_is_sorted(t_stack **stack);
-void	ft_fill(t_stack **stack_a, t_stack **stack_b, char **argv, t_list **cmd);
+void	ft_fill(t_stack **stack_a, \
+	t_stack **stack_b, char **argv, t_list **cmd);
 void	ft_sort_three(t_stack **stack, \
 	int first, int second, t_list **cmndlist);
 void	ft_sort_four(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist);

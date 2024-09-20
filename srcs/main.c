@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:26:06 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/20 17:32:42 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/20 21:23:56 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	ft_init(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
 {
 	*stack_a = ft_init_stack();
 	*stack_b = ft_init_stack();
-	*cmndlist = ft_lstnew((void *)"\0");
+	*cmndlist = ft_lstnew(ft_strdup(""));
 	if (!cmndlist)
 		ft_error(stack_a, stack_b, cmndlist);
 }
@@ -110,4 +110,10 @@ int	main(int argc, char **argv)
 	ft_fill(&stack_a, &stack_b, split, &cmndlist);
 	ft_push_swap(&stack_a, &stack_b, &cmndlist, stack_a->top);
 	return (0);
+}
+
+
+__attribute__((destructor))
+static void destructor() {
+    system("leaks -q push_swap");
 }

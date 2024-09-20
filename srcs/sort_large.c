@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 14:51:01 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/20 17:03:04 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/20 19:41:39 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	ft_div(t_stack **stack_a, t_stack **stack_b, int size, t_list **cmd)
 		size--;
 	}
 	num_rotated = size - num_pushed;
-	while (num_rotated--)
+	while (num_rotated-- > 0)
 		ft_rra(stack_a, cmd);
 	return (num_pushed);
 }
