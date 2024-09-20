@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:04:56 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/19 23:42:55 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/20 16:04:52 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,22 @@ static void	ft_push(t_stack **from, t_stack **to)
 	tmp->next = (*to)->top;
 	(*to)->top = tmp;
 	(*to)->size++;
+	if ((*to)->size == 1)
+		(*to)->bottom = tmp;
+	if ((*from)->size == 0)
+		(*from)->bottom = NULL;
 }
 
-void	ft_pa(t_stack **stack_a, t_stack **stack_b)
+void	ft_pa(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
 {
 	ft_push(stack_b, stack_a);
-	ft_printf("pa\n");
+	if (cmndlist)
+		ft_lstadd_back(cmndlist, ft_lstnew("pa"));
 }
 
-void	ft_pb(t_stack **stack_a, t_stack **stack_b)
+void	ft_pb(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
 {
 	ft_push(stack_a, stack_b);
-	ft_printf("pb\n");
+	if (cmndlist)
+		ft_lstadd_back(cmndlist, ft_lstnew("pb"));
 }

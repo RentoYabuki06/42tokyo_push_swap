@@ -6,7 +6,7 @@
 #    By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/08 13:21:51 by yabukirento       #+#    #+#              #
-#    Updated: 2024/09/15 15:52:49 by ryabuki          ###   ########.fr        #
+#    Updated: 2024/09/20 16:18:22 by ryabuki          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,11 @@ SRCS =	./srcs/required_functions/push.c \
 		./srcs/required_functions/reverse_rotate.c \
 		./srcs/required_functions/rotate.c \
 		./srcs/required_functions/swap.c \
-		./srcs/stack.c \
 		./srcs/fill_stack.c \
 		./srcs/main.c \
-		./srcs/node.c \
+		./srcs/free.c \
+		./srcs/error.c \
+		./srcs/ft_is_sorted.c \
 		./srcs/sort_small.c \
 		./srcs/sort_large.c \
 

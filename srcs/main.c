@@ -6,93 +6,108 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:26:06 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/20 10:01:58 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/20 17:32:42 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	ft_is_sorted(t_stack **stack)
+static t_stack	*ft_init_stack(void)
 {
-	t_node	*cur_node;
+	t_stack	*stack;
 
-	if (!(*stack) || !(*stack)->top)
-		return (1);
-	cur_node = (*stack)->top;
-	while (cur_node->next)
-	{
-		if (cur_node->value > cur_node->next->value)
-			return (0);
-		cur_node = cur_node->next;
-	}
-	return (1);
+	stack = (t_stack *)malloc(sizeof(t_stack));
+	if (!stack)
+		return (NULL);
+	stack->top = NULL;
+	stack->bottom = NULL;
+	stack->size = 0;
+	return (stack);
 }
 
-static void	ft_push_swap(t_stack **stack_a, t_stack **stack_b)
+static void	ft_push_swap(t_stack **stack_a, \
+	t_stack **stack_b, t_list **cmndlist, t_node *top)
 {
+	t_list	*tmp;
+
 	if (ft_is_sorted(stack_a))
 		return ;
+	else if ((*stack_a)->size == 2 && top->value > top->next->value)
+		ft_sa(stack_a, cmndlist);
 	else if ((*stack_a)->size == 2)
-	{
-		if ((*stack_a)->top->value > (*stack_a)->top->next->value)
-			ft_sa(stack_a);
-	}
+		return ;
 	else if ((*stack_a)->size == 3)
-		ft_sort_three(stack_a, 0, 0, 0);
+		ft_sort_three(stack_a, top->value, top->next->value, cmndlist);
 	else if ((*stack_a)->size == 4)
-		ft_sort_four(stack_a, stack_b);
+		ft_sort_four(stack_a, stack_b, cmndlist);
 	else if ((*stack_a)->size == 5)
-		ft_sort_five(stack_a, stack_b);
+		ft_sort_five(stack_a, stack_b, cmndlist);
 	else
-		ft_sort_large(stack_a, stack_b);
-	return ;
+		ft_sort_large(stack_a, stack_b, cmndlist);
+	tmp = (*cmndlist)->next;
+	while (tmp && tmp->content && cmndlist)
+	{
+		ft_putstr_fd(tmp->content, 1);
+		ft_putstr_fd("\n", 1);
+		tmp = tmp->next;
+	}
+	ft_free_all(stack_a, stack_b, cmndlist);
+}
+
+static bool	ft_issplit(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] == ' ' && str[i])
+		i++;
+	if ((str[i] == '-' || str[i] == '+') && str[i])
+		i++;
+	if (!ft_isdigit(str[i]))
+		return (false);
+	while (ft_isdigit(str[i]) && str[i])
+		i++;
+	while (str[i] == ' ' && str[i])
+		i++;
+	if ((str[i] == '-' || str[i] == '+') && str[i])
+		i++;
+	if (ft_isdigit(str[i]) && str[i])
+		return (true);
+	return (false);
+}
+
+static void	ft_init(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
+{
+	*stack_a = ft_init_stack();
+	*stack_b = ft_init_stack();
+	*cmndlist = ft_lstnew((void *)"\0");
+	if (!cmndlist)
+		ft_error(stack_a, stack_b, cmndlist);
 }
 
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
-	bool	issplit;
+	t_list	*cmndlist;
+	char	**split;
 
-	issplit = false;
-	if (argc < 2)
+	if (argc == 1 || argv[1][0] == '\0')
+		return (0);
+	ft_init(&stack_a, &stack_b, &cmndlist);
+	if (ft_issplit(argv[1]) && argc != 2)
+		ft_error(&stack_a, &stack_b, &cmndlist);
+	if (ft_issplit(argv[1]))
+		split = ft_split(argv[1], ' ');
+	else
+		split = argv + 1;
+	if (argc == 2 && !ft_issplit(argv[1]))
 	{
-		ft_printf("---- argc is needed! -----\n"); // test
+		argc = ft_atoi_ps(split[0], &stack_a, &stack_b, &cmndlist);
+		ft_free_all(&stack_a, &stack_b, &cmndlist);
 		return (0);
 	}
-	stack_a = ft_init_stack();
-	stack_b = ft_init_stack();
-	if (argc == 2)
-	{
-		argv = ft_split(argv[1], ' ');
-		argc = 1;
-		issplit = true;
-		while (argv[argc - 1])
-			argc++;
-		ft_printf("---- split done! argc is [%d] , stack size [%d][%d] -----\n", argc, stack_a->size, stack_b->size); // test
-	}
-	ft_print_argv(argv); // teset
-	if (argc == 2)
-	{
-		ft_printf("---- more argc is wanted!  -----\n"); // test
-		return (0);
-	}
-	if (!ft_fill_stack(&stack_a, argc, argv, issplit))
-	{
-		ft_printf("Error\n");
-		ft_free_stack(&stack_a);
-		ft_free_stack(&stack_b);
-		exit(EXIT_FAILURE);
-	}
-	ft_printf("---->>>>> before sort, argc is [%d] , stack size [%d][%d]  >>>>>>-----\n", argc, stack_a->size, stack_b->size); // test
-	ft_print_stack(&stack_a);
-	ft_print_stack(&stack_b);
-	ft_push_swap(&stack_a, &stack_b);
-	ft_printf("-----\n-----\n-----\n-----\n-----\n-----\n"); // test
-	ft_printf("---->>>>> after sort, argc is [%d] , stack size [%d][%d]  >>>>>>>-----\n", argc, stack_a->size, stack_b->size); // test
-	ft_print_stack(&stack_a);
-	ft_print_stack(&stack_b);
-	ft_free_stack(&stack_a);
-	ft_free_stack(&stack_b);
+	ft_fill(&stack_a, &stack_b, split, &cmndlist);
+	ft_push_swap(&stack_a, &stack_b, &cmndlist, stack_a->top);
 	return (0);
 }
