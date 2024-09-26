@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:33:35 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/20 16:09:01 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/26 21:34:24 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,34 +40,34 @@ static int	ft_find_max(t_node *top)
 	return (max);
 }
 
-void	ft_sort_three(t_stack **stack, int first, int second, t_list **cmndlist)
+void	ft_sort_three(t_stack **stack, int first, int second)
 {
 	int	third;
 
 	third = (*stack)->top->next->next->value;
 	if (first > second && first < third)
-		ft_sa(stack, cmndlist);
+		ft_sa(stack);
 	else if (first < third && third < second)
 	{
-		ft_ra(stack, cmndlist);
-		ft_sa(stack, cmndlist);
-		ft_rra(stack, cmndlist);
+		ft_ra(stack);
+		ft_sa(stack);
+		ft_rra(stack);
 	}
 	else if (first < second && first > third)
 	{
-		ft_ra(stack, cmndlist);
-		ft_ra(stack, cmndlist);
+		ft_ra(stack);
+		ft_ra(stack);
 	}
 	else if (first > third && second < third)
-		ft_ra(stack, cmndlist);
+		ft_ra(stack);
 	else
 	{
-		ft_sa(stack, cmndlist);
-		ft_rra(stack, cmndlist);
+		ft_sa(stack);
+		ft_rra(stack);
 	}
 }
 
-void	ft_sort_four(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
+void	ft_sort_four(t_stack **stack_a, t_stack **stack_b)
 {
 	int	min;
 	int	first;
@@ -77,20 +77,20 @@ void	ft_sort_four(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
 	while ((*stack_a)->size > 3)
 	{
 		if ((*stack_a)->top->value == min)
-			ft_pb(stack_a, stack_b, cmndlist);
+			ft_pb(stack_a, stack_b);
 		else
-			ft_ra(stack_a, cmndlist);
+			ft_ra(stack_a);
 	}
 	if (!ft_is_sorted(stack_a))
 	{
 		first = (*stack_a)->top->value;
 		second = (*stack_a)->top->next->value;
-		ft_sort_three(stack_a, first, second, cmndlist);
+		ft_sort_three(stack_a, first, second);
 	}
-	ft_pa(stack_a, stack_b, cmndlist);
+	ft_pa(stack_a, stack_b);
 }
 
-void	ft_sort_five(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
+void	ft_sort_five(t_stack **stack_a, t_stack **stack_b)
 {
 	int	min;
 	int	max;
@@ -100,17 +100,17 @@ void	ft_sort_five(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
 	while ((*stack_a)->size > 3)
 	{
 		if ((*stack_a)->top->value == min || (*stack_a)->top->value == max)
-			ft_pb(stack_a, stack_b, cmndlist);
+			ft_pb(stack_a, stack_b);
 		else
-			ft_ra(stack_a, cmndlist);
+			ft_ra(stack_a);
 	}
 	if (!ft_is_sorted(stack_a))
 		ft_sort_three(stack_a, (*stack_a)->top->value, \
-			(*stack_a)->top->next->value, cmndlist);
-	ft_pa(stack_a, stack_b, cmndlist);
+			(*stack_a)->top->next->value);
+	ft_pa(stack_a, stack_b);
 	if ((*stack_a)->top->value == max)
-		ft_ra(stack_a, cmndlist);
-	ft_pa(stack_a, stack_b, cmndlist);
+		ft_ra(stack_a);
+	ft_pa(stack_a, stack_b);
 	if ((*stack_a)->top->value == max)
-		ft_ra(stack_a, cmndlist);
+		ft_ra(stack_a);
 }

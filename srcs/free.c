@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 13:17:49 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/26 20:19:50 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/26 21:33:12 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,30 +53,9 @@ void ft_free_split(char **split)
 }
 
 
-static void	ft_free_lst(t_list **lst)
-{
-	t_list	*plst;
-	t_list	*tmp;
-
-	if (!lst || !*lst)
-		return ;
-	plst = *lst;
-	while (plst)
-	{
-		tmp = plst->next;
-		if (plst->content)
-			free(plst->content);
-		free(plst);
-		plst = tmp;
-	}
-	*lst = NULL;
-}
-
-
-void	ft_free_all(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist, char **split)
+void	ft_free_all(t_stack **stack_a, t_stack **stack_b, char **split)
 {
 	ft_free_stack(stack_a);
 	ft_free_stack(stack_b);
-	ft_free_lst(cmndlist);
 	ft_free_split(split);
 }

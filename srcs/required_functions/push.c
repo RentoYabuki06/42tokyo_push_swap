@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:04:56 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/26 20:04:03 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/26 21:34:57 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,14 @@ static void	ft_push(t_stack **from, t_stack **to)
 		(*from)->bottom = NULL;
 }
 
-void	ft_pa(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
+void	ft_pa(t_stack **stack_a, t_stack **stack_b)
 {
 	ft_push(stack_b, stack_a);
-	if (cmndlist)
-		ft_lstadd_back(cmndlist, ft_lstnew(ft_strdup("pa")));
+	write(1, "pa\n", 3);
 }
 
-void	ft_pb(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
+void	ft_pb(t_stack **stack_a, t_stack **stack_b)
 {
 	ft_push(stack_a, stack_b);
-	if (cmndlist)
-		ft_lstadd_back(cmndlist, ft_lstnew(ft_strdup("pb")));
+	write(1, "pb\n", 3);
 }
