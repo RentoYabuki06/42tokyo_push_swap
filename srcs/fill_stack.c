@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 13:06:51 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/20 17:32:08 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/26 19:43:05 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static bool	ft_is_space(char c)
 	return (false);
 }
 
-int	ft_atoi_ps(char *s, t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
+int	ft_atoi_ps(char *s)
 {
 	int			sign;
 	long long	ans;
@@ -40,18 +40,32 @@ int	ft_atoi_ps(char *s, t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
 	if (*s == '-' || *s == '+')
 		s++;
 	if (!*s || ft_isdigit(*s) == false)
-		ft_error(stack_a, stack_b, cmndlist);
+		return (EXIT_FAILURE);
 	while (*s >= '0' && *s <= '9')
 		ans = (ans * 10) + (*(s++) - 48);
 	if (ans > 2147483648)
-		ft_error(stack_a, stack_b, cmndlist);
+		return (EXIT_FAILURE);
 	while (*s == ' ')
 		s++;
 	if (*s != '\0')
-		ft_error(stack_a, stack_b, cmndlist);
+		return (EXIT_FAILURE);
 	if ((sign * ans) > 2147483647 || (sign * ans) < -2147483648)
-		ft_error(stack_a, stack_b, cmndlist);
+		return (EXIT_FAILURE);
 	return ((int)(ans * sign));
+}
+
+bool	ft_is_one(char *s)
+{
+	while (ft_is_space(*s))
+		s++;
+	if (*s == '-' || *s == '+')
+		s++;
+	if (*s != '1')
+		return (false);
+	s++;
+	if (*s != '\0')
+		return (false);
+	return (true);
 }
 
 static bool	ft_check_duplicates(t_stack **stack, int num)
@@ -68,21 +82,23 @@ static bool	ft_check_duplicates(t_stack **stack, int num)
 	return (false);
 }
 
-void	ft_fill(t_stack **stack_a, t_stack **stack_b, char **argv, t_list **cmd)
+int	ft_fill(t_stack **stack_a, char **split)
 {
 	int		i;
 	int		num;
 	t_node	*node;
 
 	i = 0;
-	while (argv[i])
+	while (split[i])
 	{
-		num = ft_atoi_ps(argv[i], stack_a, stack_b, cmd);
+		num = ft_atoi_ps(split[i]);
+		if (num == 1 && !ft_is_one(split[i]))
+			return (EXIT_FAILURE);
 		if (ft_check_duplicates(stack_a, num))
-			ft_error(stack_a, stack_b, cmd);
+			return (EXIT_FAILURE);
 		node = (t_node *)malloc(sizeof(t_node));
 		if (!node)
-			ft_error(stack_a, stack_b, cmd);
+			return (EXIT_FAILURE);
 		node->value = num;
 		node->next = NULL;
 		if ((*stack_a)->top == NULL)
@@ -93,4 +109,5 @@ void	ft_fill(t_stack **stack_a, t_stack **stack_b, char **argv, t_list **cmd)
 		(*stack_a)->size++;
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }

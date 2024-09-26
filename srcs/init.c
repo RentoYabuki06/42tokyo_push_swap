@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 19:00:52 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/26 19:01:33 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/26 20:02:28 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	ft_init(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
 {
 	*stack_a = ft_init_stack();
 	*stack_b = ft_init_stack();
-	*cmndlist = ft_lstnew("start");
+	*cmndlist = ft_lstnew(ft_strdup(""));
 	if (!cmndlist)
-		ft_error(stack_a, stack_b, cmndlist);
+		ft_error(stack_a, stack_b, cmndlist, NULL);
 }
 
 t_stack	*ft_init_stack(void)

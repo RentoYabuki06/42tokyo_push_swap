@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 13:17:49 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/26 15:51:26 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/26 20:19:50 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,21 @@ static void	ft_free_stack(t_stack **stack)
 	*stack = NULL;
 }
 
-// static void ft_free_split(char **split)
-// {
-// 	int	i;
+void ft_free_split(char **split)
+{
+	int i;
 
-// 	i = 0;
-// 	while (split[i])
-// 	{
-// 		free(split[i]);
-// 		i++;
-// 	}
-// 	free(split);
-// }
+	if (!split)
+		return;
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
+
 
 static void	ft_free_lst(t_list **lst)
 {
@@ -61,6 +64,8 @@ static void	ft_free_lst(t_list **lst)
 	while (plst)
 	{
 		tmp = plst->next;
+		if (plst->content)
+			free(plst->content);
 		free(plst);
 		plst = tmp;
 	}
@@ -68,14 +73,10 @@ static void	ft_free_lst(t_list **lst)
 }
 
 
-void	ft_free_all(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
+void	ft_free_all(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist, char **split)
 {
 	ft_free_stack(stack_a);
-	ft_printf("after free : stack a\n");
 	ft_free_stack(stack_b);
-	ft_printf("after free : stack b\n");
 	ft_free_lst(cmndlist);
-	ft_printf("after free : cmndlist\n");
-	// ft_free_split(split);
-	// ft_printf("after free : split\n");
+	ft_free_split(split);
 }

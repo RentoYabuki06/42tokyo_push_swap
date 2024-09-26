@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 21:15:40 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/26 19:02:34 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/26 20:10:35 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../srcs/libft/libft.h"
 # include "../srcs/ft_printf/ft_printf.h"
 # include <stdbool.h>
+# include <stdlib.h>
 
 typedef struct s_node
 {
@@ -44,19 +45,21 @@ void	ft_rrr(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist);
 void	ft_rotate(t_stack **stack);
 
 void	ft_swap(t_stack **stack);
+bool	ft_is_one(char *s);
 t_stack	*ft_init_stack(void);
 void	ft_init(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist);
-int		ft_atoi_ps(char *s, t_stack **stack_a, \
-	t_stack **stack_b, t_list **cmndlist);
+int		ft_atoi_ps(char *s);
 int		ft_is_sorted(t_stack **stack);
-void	ft_fill(t_stack **stack_a, \
-	t_stack **stack_b, char **argv, t_list **cmd);
-void	ft_sort_three(t_stack **stack, \
-	int first, int second, t_list **cmndlist);
+int		ft_fill(t_stack **stack_a, char **split);
+void	ft_sort_three(t_stack **stack, int first, int second, t_list **cmndlist);
 void	ft_sort_four(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist);
 void	ft_sort_five(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist);
-void	ft_sort_large(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist);
-void	ft_error(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist);
-void	ft_free_all(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist);
+void	ft_error(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist, char **split);
+void	ft_free_all(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist, char **split);
+void	ft_free_split(char **split);
+void	ft_sort_quick_a(t_stack **stack_a, \
+	t_stack **stack_b, int size, t_list **cmndlist);
+void	ft_sort_quick_b(t_stack **stack_a, \
+	t_stack **stack_b, int size, t_list **cmndlist);
 
 #endif

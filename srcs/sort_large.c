@@ -3,99 +3,107 @@
 /*                                                        :::      ::::::::   */
 /*   sort_large.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 14:51:01 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/20 19:41:39 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/26 20:23:11 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static void	ft_quicksort_array(int *array, int low, int high, int i)
-{
-	int	pivot;
-	int	j;
-	int	temp;
-
-	if (low < high)
-	{
-		pivot = array[high];
-		j = low;
-		while (j < high)
-		{
-			if (array[j] <= pivot)
-			{
-				i++;
-				temp = array[i];
-				array[i] = array[j];
-				array[j] = temp;
-			}
-			j++;
-		}
-		temp = array[i + 1];
-		array[i + 1] = array[high];
-		array[high] = temp;
-		ft_quicksort_array(array, low, i, low - 1);
-		ft_quicksort_array(array, i + 2, high, i + 1);
-	}
-}
-
-static int	ft_get_pivot_value_for_range(t_stack **stack_a, \
-	t_stack **stack_b, int size, t_list **cmndlist)
+static int	ft_get_pivot_value_for_range(t_stack **stack, int size)
 {
 	int		i;
-	int		*array;
 	int		pivot;
 	t_node	*current;
+	t_node	*sorted;
 
-	array = (int *)malloc(sizeof(int) * size);
-	if (!array)
-		ft_error(stack_a, stack_b, cmndlist);
-	current = (*stack_a)->top;
+	current = (*stack)->top;
+	sorted = current;
 	i = 0;
 	while (i < size)
 	{
-		array[i] = current->value;
+		t_node	*next = current->next;
+		while (next)
+		{
+			if (current->value > next->value)
+			{
+				int temp = current->value;
+				current->value = next->value;
+				next->value = temp;
+			}
+			next = next->next;
+		}
 		current = current->next;
 		i++;
 	}
-	ft_quicksort_array(array, 0, size - 1, -1);
-	pivot = array[size / 2];
-	free(array);
+	pivot = sorted->value;
 	return (pivot);
 }
 
-static int	ft_div(t_stack **stack_a, t_stack **stack_b, int size, t_list **cmd)
+
+static int	ft_div_a(t_stack **stack_a, t_stack **stack_b, int size, t_list **cmd)
 {
 	int	pivot;
 	int	num_pushed;
 	int	num_rotated;
+	int original_size = size;
 
-	pivot = ft_get_pivot_value_for_range(stack_a, stack_b, size, cmd);
+	pivot = ft_get_pivot_value_for_range(stack_a, size);
 	num_pushed = 0;
 	while (size > 0)
 	{
 		if ((*stack_a)->top == NULL)
-			break ;
+			break;
 		if ((*stack_a)->top->value < pivot)
+		{
 			num_pushed++;
-		if ((*stack_a)->top->value < pivot)
 			ft_pb(stack_a, stack_b, cmd);
+		}
 		else
 			ft_ra(stack_a, cmd);
 		size--;
 	}
-	num_rotated = size - num_pushed;
+	num_rotated = original_size - num_pushed;
 	while (num_rotated-- > 0)
 		ft_rra(stack_a, cmd);
 	return (num_pushed);
 }
 
-static void	ft_sort_quick(t_stack **stack_a, \
+static int	ft_div_b(t_stack **stack_a, t_stack **stack_b, int size, t_list **cmd)
+{
+	int	pivot;
+	int	num_pushed;
+	int	num_rotated;
+	int original_size = size;
+
+	pivot = ft_get_pivot_value_for_range(stack_b, size);
+	num_pushed = 0;
+	while (size > 0)
+	{
+		if ((*stack_b)->top == NULL)
+			break;
+		if ((*stack_b)->top->value < pivot)
+		{
+			num_pushed++;
+			ft_pa(stack_a, stack_b, cmd);
+		}
+		else
+			ft_rb(stack_b, cmd);
+		size--;
+	}
+	num_rotated = original_size - num_pushed;
+	while (num_rotated-- > 0)
+		ft_rrb(stack_b, cmd);
+	return (num_pushed);
+}
+
+void	ft_sort_quick_a(t_stack **stack_a, \
 	t_stack **stack_b, int size, t_list **cmndlist)
 {
 	int	num_pushed;
+	int	num_rotated;
 
 	if (size <= 1 || !stack_a || !(*stack_a) || !((*stack_a)->top))
 		return ;
@@ -103,34 +111,42 @@ static void	ft_sort_quick(t_stack **stack_a, \
 		ft_sa(stack_a, cmndlist);
 	if (size == 2)
 		return ;
-	num_pushed = ft_div(stack_a, stack_b, size, cmndlist);
+	num_pushed = ft_div_a(stack_a, stack_b, size, cmndlist);
 	if (num_pushed > 0)
-		ft_sort_quick(stack_a, stack_b, size - num_pushed, cmndlist);
+		ft_sort_quick_a(stack_a, stack_b, size - num_pushed, cmndlist);
 	if (num_pushed > 0)
-		ft_sort_quick(stack_b, stack_a, num_pushed, cmndlist);
-	while (num_pushed > 0)
+		ft_sort_quick_b(stack_a, stack_b, num_pushed, cmndlist);
+	num_rotated = num_pushed;
+	while (num_rotated-- > 0)
 	{
-		size = 0;
-		while (size++ < num_pushed - 1)
-			ft_rb(stack_b, cmndlist);
+		ft_rb(stack_b, cmndlist);
 		ft_pa(stack_a, stack_b, cmndlist);
-		while (size--)
-			ft_rrb(stack_b, cmndlist);
-		num_pushed--;
+		ft_rrb(stack_b, cmndlist);
 	}
-	return ;
 }
 
-void	ft_sort_large(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
+void	ft_sort_quick_b(t_stack **stack_a, \
+	t_stack **stack_b, int size, t_list **cmndlist)
 {
-	int	size;
+	int	num_pushed;
+	int	num_rotated;
 
-	if (!cmndlist)
-		ft_error(stack_a, stack_b, cmndlist);
-	if (!stack_a || !(*stack_a) || !((*stack_a)->top))
+	if (size <= 1 || !stack_b || !(*stack_b) || !((*stack_b)->top))
 		return ;
-	size = (*stack_a)->size;
-	if (size <= 1)
+	if (size == 2 && ((*stack_b)->top->value > (*stack_b)->top->next->value))
+		ft_sb(stack_b, cmndlist);
+	if (size == 2)
 		return ;
-	ft_sort_quick(stack_a, stack_b, size, cmndlist);
+	num_pushed = ft_div_b(stack_b, stack_a, size, cmndlist);
+	if (num_pushed > 0)
+		ft_sort_quick_b(stack_a, stack_b, size - num_pushed, cmndlist);
+	if (num_pushed > 0)
+		ft_sort_quick_a(stack_a, stack_b, num_pushed, cmndlist);
+	num_rotated = num_pushed;
+	while (num_rotated-- > 0)
+	{
+		ft_ra(stack_a, cmndlist);
+		ft_pb(stack_a, stack_b, cmndlist);
+		ft_rra(stack_a, cmndlist);
+	}
 }

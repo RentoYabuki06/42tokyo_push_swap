@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:04:56 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/20 16:04:52 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/26 20:04:03 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	ft_pa(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
 {
 	ft_push(stack_b, stack_a);
 	if (cmndlist)
-		ft_lstadd_back(cmndlist, ft_lstnew("pa"));
+		ft_lstadd_back(cmndlist, ft_lstnew(ft_strdup("pa")));
 }
 
 void	ft_pb(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
 {
 	ft_push(stack_a, stack_b);
 	if (cmndlist)
-		ft_lstadd_back(cmndlist, ft_lstnew("pb"));
+		ft_lstadd_back(cmndlist, ft_lstnew(ft_strdup("pb")));
 }

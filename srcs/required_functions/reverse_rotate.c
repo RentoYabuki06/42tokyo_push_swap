@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:04:33 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/20 13:34:30 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/26 20:04:47 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ void	ft_rra(t_stack **stack_a, t_list **cmndlist)
 {
 	ft_reverse_rotate(stack_a);
 	if (cmndlist)
-		ft_lstadd_back(cmndlist, ft_lstnew("rra"));
+		ft_lstadd_back(cmndlist, ft_lstnew(ft_strdup("rra")));
 }
 
 void	ft_rrb(t_stack **stack_b, t_list **cmndlist)
 {
 	ft_reverse_rotate(stack_b);
 	if (cmndlist)
-		ft_lstadd_back(cmndlist, ft_lstnew("rrb"));
+		ft_lstadd_back(cmndlist, ft_lstnew(ft_strdup("rrb")));
 }
 
 void	ft_rrr(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
@@ -50,5 +50,6 @@ void	ft_rrr(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
 	ft_reverse_rotate(stack_a);
 	ft_reverse_rotate(stack_b);
 	if (cmndlist)
-		ft_lstadd_back(cmndlist, ft_lstnew("rrr"));
+		ft_lstadd_back(cmndlist, ft_lstnew(ft_strdup("rrr")));
 }
+
