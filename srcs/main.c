@@ -6,24 +6,11 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:26:06 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/26 15:51:11 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/26 19:01:04 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-static t_stack	*ft_init_stack(void)
-{
-	t_stack	*stack;
-
-	stack = (t_stack *)malloc(sizeof(t_stack));
-	if (!stack)
-		return (NULL);
-	stack->top = NULL;
-	stack->bottom = NULL;
-	stack->size = 0;
-	return (stack);
-}
 
 static void	ft_push_swap(t_stack **stack_a, \
 	t_stack **stack_b, t_list **cmndlist, t_node *top)
@@ -73,15 +60,6 @@ static bool	ft_issplit(char *str)
 	if (ft_isdigit(str[i]) && str[i])
 		return (true);
 	return (false);
-}
-
-static void	ft_init(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
-{
-	*stack_a = ft_init_stack();
-	*stack_b = ft_init_stack();
-	*cmndlist = ft_lstnew("start");
-	if (!cmndlist)
-		ft_error(stack_a, stack_b, cmndlist);
 }
 
 int	main(int argc, char **argv)
