@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:26:06 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/20 21:23:56 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/26 15:51:11 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static void	ft_push_swap(t_stack **stack_a, \
 		ft_putstr_fd("\n", 1);
 		tmp = tmp->next;
 	}
-	ft_free_all(stack_a, stack_b, cmndlist);
 }
 
 static bool	ft_issplit(char *str)
@@ -80,7 +79,7 @@ static void	ft_init(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist)
 {
 	*stack_a = ft_init_stack();
 	*stack_b = ft_init_stack();
-	*cmndlist = ft_lstnew(ft_strdup(""));
+	*cmndlist = ft_lstnew("start");
 	if (!cmndlist)
 		ft_error(stack_a, stack_b, cmndlist);
 }
@@ -107,8 +106,12 @@ int	main(int argc, char **argv)
 		ft_free_all(&stack_a, &stack_b, &cmndlist);
 		return (0);
 	}
+	ft_printf("before fill\n");
 	ft_fill(&stack_a, &stack_b, split, &cmndlist);
+	ft_printf("after fill\n");
 	ft_push_swap(&stack_a, &stack_b, &cmndlist, stack_a->top);
+	ft_printf("after push_swap\n");
+	ft_free_all(&stack_a, &stack_b, &cmndlist);
 	return (0);
 }
 

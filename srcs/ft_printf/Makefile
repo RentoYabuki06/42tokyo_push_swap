@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+         #
+#    By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:59:44 by yabukirento       #+#    #+#              #
-#    Updated: 2024/09/20 21:24:35 by ryabuki          ###   ########.fr        #
+#    Updated: 2024/09/21 11:28:50 by yabukirento      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
