@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+         #
+#    By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/08 13:21:51 by yabukirento       #+#    #+#              #
-#    Updated: 2024/09/20 21:24:31 by ryabuki          ###   ########.fr        #
+#    Updated: 2024/09/26 19:01:25 by yabukirento      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS =	./srcs/required_functions/push.c \
 		./srcs/fill_stack.c \
 		./srcs/main.c \
 		./srcs/free.c \
+		./srcs/init.c \
 		./srcs/error.c \
 		./srcs/ft_is_sorted.c \
 		./srcs/sort_small.c \

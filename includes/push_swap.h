@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 21:15:40 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/26 15:51:38 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/26 19:02:34 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ typedef struct s_node
 	struct s_node	*next;
 }	t_node;
 
-typedef struct s_stack {
+typedef struct s_stack
+{
 	t_node	*top;
 	t_node	*bottom;
 	int		size;
@@ -43,6 +44,8 @@ void	ft_rrr(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist);
 void	ft_rotate(t_stack **stack);
 
 void	ft_swap(t_stack **stack);
+t_stack	*ft_init_stack(void);
+void	ft_init(t_stack **stack_a, t_stack **stack_b, t_list **cmndlist);
 int		ft_atoi_ps(char *s, t_stack **stack_a, \
 	t_stack **stack_b, t_list **cmndlist);
 int		ft_is_sorted(t_stack **stack);
