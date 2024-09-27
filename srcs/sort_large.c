@@ -6,145 +6,143 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 14:51:01 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/26 21:34:03 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/27 16:29:52 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static int	ft_get_pivot_value_for_range(t_stack **stack, int size)
-{
-	int		i;
-	int		pivot;
-	t_node	*current;
-	t_node	*sorted;
+#include <stdio.h>
 
+#define MAX_STACK_SIZE 1000
+
+static int	get_median(t_stack **stack, int size)
+{
+	int		values[MAX_STACK_SIZE];
+	t_node	*current;
+	int		i;
+	int		j;
+	int		temp;
+
+	if (size > MAX_STACK_SIZE)
+		size = MAX_STACK_SIZE;
 	current = (*stack)->top;
-	sorted = current;
 	i = 0;
-	while (i < size)
+	while (i < size && current != NULL)
 	{
-		t_node	*next = current->next;
-		while (next)
-		{
-			if (current->value > next->value)
-			{
-				int temp = current->value;
-				current->value = next->value;
-				next->value = temp;
-			}
-			next = next->next;
-		}
+		values[i] = current->value;
 		current = current->next;
 		i++;
 	}
-	pivot = sorted->value;
-	return (pivot);
-}
-
-
-static int	ft_div_a(t_stack **stack_a, t_stack **stack_b, int size)
-{
-	int	pivot;
-	int	num_pushed;
-	int	num_rotated;
-	int original_size = size;
-
-	pivot = ft_get_pivot_value_for_range(stack_a, size);
-	num_pushed = 0;
-	while (size > 0)
+	i = 0;
+	while (i < size - 1)
 	{
-		if ((*stack_a)->top == NULL)
-			break;
-		if ((*stack_a)->top->value < pivot)
+		j = i + 1;
+		while (j < size)
 		{
-			num_pushed++;
-			ft_pb(stack_a, stack_b);
+			if (values[i] > values[j])
+			{
+				temp = values[i];
+				values[i] = values[j];
+				values[j] = temp;
+			}
+			j++;
 		}
-		else
-			ft_ra(stack_a);
-		size--;
+		i++;
 	}
-	num_rotated = original_size - num_pushed;
-	while (num_rotated-- > 0)
-		ft_rra(stack_a);
-	return (num_pushed);
-}
-
-static int	ft_div_b(t_stack **stack_a, t_stack **stack_b, int size)
-{
-	int	pivot;
-	int	num_pushed;
-	int	num_rotated;
-	int original_size = size;
-
-	pivot = ft_get_pivot_value_for_range(stack_b, size);
-	num_pushed = 0;
-	while (size > 0)
-	{
-		if ((*stack_b)->top == NULL)
-			break;
-		if ((*stack_b)->top->value < pivot)
-		{
-			num_pushed++;
-			ft_pa(stack_a, stack_b);
-		}
-		else
-			ft_rb(stack_b);
-		size--;
-	}
-	num_rotated = original_size - num_pushed;
-	while (num_rotated-- > 0)
-		ft_rrb(stack_b);
-	return (num_pushed);
+	return (values[size / 2]);
 }
 
 void	ft_sort_quick_a(t_stack **stack_a, t_stack **stack_b, int size)
 {
-	int	num_pushed;
-	int	num_rotated;
+	int	median;
+	int	i;
+	int	pushed;
 
-	if (size <= 1 || !stack_a || !(*stack_a) || !((*stack_a)->top))
+	if (size <= 1)
 		return ;
-	if (size == 2 && ((*stack_a)->top->value > (*stack_a)->top->next->value))
-		ft_sa(stack_a);
-	if (size == 2)
-		return ;
-	num_pushed = ft_div_a(stack_a, stack_b, size);
-	if (num_pushed > 0)
-		ft_sort_quick_a(stack_a, stack_b, size - num_pushed);
-	if (num_pushed > 0)
-		ft_sort_quick_b(stack_a, stack_b, num_pushed);
-	num_rotated = num_pushed;
-	while (num_rotated-- > 0)
+	else if (size == 2)
 	{
-		ft_rb(stack_b);
-		ft_pa(stack_a, stack_b);
-		ft_rrb(stack_b);
+		if ((*stack_a)->top->value > (*stack_a)->top->next->value)
+			ft_sa(stack_a);
+		return ;
+	}
+	else
+	{
+		median = get_median(stack_a, size);
+		i = 0;
+		pushed = 0;
+		while (i < size)
+		{
+			if ((*stack_a)->top->value < median)
+			{
+				ft_pb(stack_a, stack_b);
+				pushed++;
+			}
+			else
+				ft_ra(stack_a);
+			i++;
+		}
+		if (pushed == 0 || size - pushed == 0)
+			return ;
+		i = size - pushed;
+		while (i > 0)
+		{
+			ft_rra(stack_a);
+			i--;
+		}
+		ft_sort_quick_b(stack_a, stack_b, pushed);
+		ft_sort_quick_a(stack_a, stack_b, size - pushed);
+		while (pushed > 0)
+		{
+			ft_pa(stack_a, stack_b);
+			pushed--;
+		}
 	}
 }
 
 void	ft_sort_quick_b(t_stack **stack_a, t_stack **stack_b, int size)
 {
-	int	num_pushed;
-	int	num_rotated;
+	int	median;
+	int	i;
+	int	pushed;
 
-	if (size <= 1 || !stack_b || !(*stack_b) || !((*stack_b)->top))
+	if (size <= 1)
 		return ;
-	if (size == 2 && ((*stack_b)->top->value > (*stack_b)->top->next->value))
-		ft_sb(stack_b);
-	if (size == 2)
-		return ;
-	num_pushed = ft_div_b(stack_b, stack_a, size);
-	if (num_pushed > 0)
-		ft_sort_quick_b(stack_a, stack_b, size - num_pushed);
-	if (num_pushed > 0)
-		ft_sort_quick_a(stack_a, stack_b, num_pushed);
-	num_rotated = num_pushed;
-	while (num_rotated-- > 0)
+	else if (size == 2)
 	{
-		ft_ra(stack_a);
-		ft_pb(stack_a, stack_b);
-		ft_rra(stack_a);
+		if ((*stack_b)->top->value < (*stack_b)->top->next->value)
+			ft_sb(stack_b);
+		return ;
+	}
+	else
+	{
+		median = get_median(stack_b, size);
+		i = 0;
+		pushed = 0;
+		while (i < size)
+		{
+			if ((*stack_b)->top->value >= median)
+			{
+				ft_pa(stack_a, stack_b);
+				pushed++;
+			}
+			else
+				ft_rb(stack_b);
+			i++;
+		}
+		i = size - pushed;
+		while (i > 0)
+		{
+			ft_rrb(stack_b);
+			i--;
+		}
+		ft_sort_quick_a(stack_a, stack_b, pushed);
+		ft_sort_quick_b(stack_a, stack_b, size - pushed);
+		while (pushed > 0)
+		{
+			ft_pb(stack_a, stack_b);
+			pushed--;
+		}
 	}
 }

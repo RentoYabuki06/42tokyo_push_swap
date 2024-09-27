@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:04:56 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/26 21:34:57 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/27 16:17:31 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ static void	ft_push(t_stack **from, t_stack **to)
 	t_node	*tmp;
 
 	if (!(*from) || !(*to) || (*from)->size == 0)
+	{
+		ft_printf("Stack is empty\n");
 		return ;
+	}
 	tmp = (*from)->top;
 	(*from)->top = (*from)->top->next;
 	(*from)->size--;
