@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:04:33 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/26 21:35:25 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/27 17:56:31 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,3 @@ void	ft_rrr(t_stack **stack_a, t_stack **stack_b)
 	ft_reverse_rotate(stack_b);
 	write(1, "rrr\n", 4);
 }
-

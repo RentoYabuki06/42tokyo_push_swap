@@ -6,34 +6,32 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 14:51:01 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/27 16:29:52 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/27 18:04:11 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-#include <stdio.h>
-
-#define MAX_STACK_SIZE 1000
-
-static int	get_median(t_stack **stack, int size)
+static void	ft_copy_stack_values(t_stack *stack, int *values, int size)
 {
-	int		values[MAX_STACK_SIZE];
 	t_node	*current;
 	int		i;
-	int		j;
-	int		temp;
 
-	if (size > MAX_STACK_SIZE)
-		size = MAX_STACK_SIZE;
-	current = (*stack)->top;
 	i = 0;
+	current = stack->top;
 	while (i < size && current != NULL)
 	{
-		values[i] = current->value;
+		values[i++] = current->value;
 		current = current->next;
-		i++;
 	}
+}
+
+static void	ft_sort_int_array(int *values, int size)
+{
+	int	i;
+	int	j;
+	int	temp;
+
 	i = 0;
 	while (i < size - 1)
 	{
@@ -50,6 +48,16 @@ static int	get_median(t_stack **stack, int size)
 		}
 		i++;
 	}
+}
+
+static int	ft_get_median(t_stack **stack, int size)
+{
+	int	values[MAX_STACK_SIZE];
+
+	if (size > MAX_STACK_SIZE)
+		size = MAX_STACK_SIZE;
+	ft_copy_stack_values(*stack, values, size);
+	ft_sort_int_array(values, size);
 	return (values[size / 2]);
 }
 
@@ -61,44 +69,25 @@ void	ft_sort_quick_a(t_stack **stack_a, t_stack **stack_b, int size)
 
 	if (size <= 1)
 		return ;
-	else if (size == 2)
-	{
-		if ((*stack_a)->top->value > (*stack_a)->top->next->value)
-			ft_sa(stack_a);
+	if (size == 2 && (*stack_a)->top->value > (*stack_a)->top->next->value)
+		ft_sa(stack_a);
+	if (size == 2)
 		return ;
-	}
-	else
+	median = ft_get_median(stack_a, size);
+	i = 0;
+	pushed = 0;
+	while (i++ < size)
 	{
-		median = get_median(stack_a, size);
-		i = 0;
-		pushed = 0;
-		while (i < size)
-		{
-			if ((*stack_a)->top->value < median)
-			{
-				ft_pb(stack_a, stack_b);
-				pushed++;
-			}
-			else
-				ft_ra(stack_a);
-			i++;
-		}
-		if (pushed == 0 || size - pushed == 0)
-			return ;
-		i = size - pushed;
-		while (i > 0)
-		{
-			ft_rra(stack_a);
-			i--;
-		}
-		ft_sort_quick_b(stack_a, stack_b, pushed);
-		ft_sort_quick_a(stack_a, stack_b, size - pushed);
-		while (pushed > 0)
-		{
-			ft_pa(stack_a, stack_b);
-			pushed--;
-		}
+		if ((*stack_a)->top->value < median)
+			pushed += ft_pb_int(stack_a, stack_b);
+		else
+			ft_ra(stack_a);
 	}
+	ft_rra_time(stack_a, size - pushed);
+	ft_sort_quick_b(stack_a, stack_b, pushed);
+	ft_sort_quick_a(stack_a, stack_b, size - pushed);
+	while (pushed-- > 0)
+		ft_pa(stack_a, stack_b);
 }
 
 void	ft_sort_quick_b(t_stack **stack_a, t_stack **stack_b, int size)
@@ -109,40 +98,23 @@ void	ft_sort_quick_b(t_stack **stack_a, t_stack **stack_b, int size)
 
 	if (size <= 1)
 		return ;
-	else if (size == 2)
-	{
-		if ((*stack_b)->top->value < (*stack_b)->top->next->value)
-			ft_sb(stack_b);
+	if (size == 2 && (*stack_b)->top->value < (*stack_b)->top->next->value)
+		ft_sb(stack_b);
+	if (size == 2)
 		return ;
-	}
-	else
+	median = ft_get_median(stack_b, size);
+	i = 0;
+	pushed = 0;
+	while (i++ < size)
 	{
-		median = get_median(stack_b, size);
-		i = 0;
-		pushed = 0;
-		while (i < size)
-		{
-			if ((*stack_b)->top->value >= median)
-			{
-				ft_pa(stack_a, stack_b);
-				pushed++;
-			}
-			else
-				ft_rb(stack_b);
-			i++;
-		}
-		i = size - pushed;
-		while (i > 0)
-		{
-			ft_rrb(stack_b);
-			i--;
-		}
-		ft_sort_quick_a(stack_a, stack_b, pushed);
-		ft_sort_quick_b(stack_a, stack_b, size - pushed);
-		while (pushed > 0)
-		{
-			ft_pb(stack_a, stack_b);
-			pushed--;
-		}
+		if ((*stack_b)->top->value >= median)
+			pushed += ft_pa_int(stack_a, stack_b);
+		else
+			ft_rb(stack_b);
 	}
+	ft_rrb_time(stack_b, size - pushed);
+	ft_sort_quick_a(stack_a, stack_b, pushed);
+	ft_sort_quick_b(stack_a, stack_b, size - pushed);
+	while (pushed-- > 0)
+		ft_pb(stack_a, stack_b);
 }

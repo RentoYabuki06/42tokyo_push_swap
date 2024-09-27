@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 13:06:51 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/26 19:43:05 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/27 17:36:57 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,10 @@ int	ft_fill(t_stack **stack_a, char **split)
 	while (split[i])
 	{
 		num = ft_atoi_ps(split[i]);
-		if (num == 1 && !ft_is_one(split[i]))
+		node = (t_node *)malloc(sizeof(t_node));
+		if ((num == 1 && !ft_is_one(split[i])) || !node)
 			return (EXIT_FAILURE);
 		if (ft_check_duplicates(stack_a, num))
-			return (EXIT_FAILURE);
-		node = (t_node *)malloc(sizeof(t_node));
-		if (!node)
 			return (EXIT_FAILURE);
 		node->value = num;
 		node->next = NULL;

@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:04:56 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/27 16:17:31 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/27 17:55:25 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,16 @@ void	ft_pb(t_stack **stack_a, t_stack **stack_b)
 {
 	ft_push(stack_a, stack_b);
 	write(1, "pb\n", 3);
+}
+
+int	ft_pa_int(t_stack **stack_a, t_stack **stack_b)
+{
+	ft_pa(stack_a, stack_b);
+	return (1);
+}
+
+int	ft_pb_int(t_stack **stack_a, t_stack **stack_b)
+{
+	ft_pb(stack_a, stack_b);
+	return (1);
 }

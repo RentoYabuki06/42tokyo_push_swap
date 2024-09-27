@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 21:15:40 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/27 16:10:43 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/27 17:54:11 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "../srcs/ft_printf/ft_printf.h"
 # include <stdbool.h>
 # include <stdlib.h>
+
+# define MAX_STACK_SIZE 1000
 
 typedef struct s_node
 {
@@ -59,5 +61,9 @@ void	ft_free_all(t_stack **stack_a, t_stack **stack_b, char **split);
 void	ft_free_split(char **split);
 void	ft_sort_quick_a(t_stack **stack_a, t_stack **stack_b, int size);
 void	ft_sort_quick_b(t_stack **stack_a, t_stack **stack_b, int size);
+void	ft_rra_time(t_stack **stack_a, int times);
+void	ft_rrb_time(t_stack **stack_b, int times);
+int		ft_pa_int(t_stack **stack_a, t_stack **stack_b);
+int		ft_pb_int(t_stack **stack_a, t_stack **stack_b);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 13:17:49 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/26 21:33:12 by ryabuki          ###   ########.fr       */
+/*   Updated: 2024/09/27 17:30:35 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ static void	ft_free_stack(t_stack **stack)
 	*stack = NULL;
 }
 
-void ft_free_split(char **split)
+void	ft_free_split(char **split)
 {
-	int i;
+	int	i;
 
 	if (!split)
-		return;
+		return ;
 	i = 0;
 	while (split[i])
 	{
@@ -51,7 +51,6 @@ void ft_free_split(char **split)
 	}
 	free(split);
 }
-
 
 void	ft_free_all(t_stack **stack_a, t_stack **stack_b, char **split)
 {
