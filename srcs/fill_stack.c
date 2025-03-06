@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 13:06:51 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/03/06 14:43:06 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/03/06 17:15:31 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,10 @@ int	ft_fill(t_stack **stack_a, char **split)
 	while (split[i])
 	{
 		num = ft_atoi_ps(split[i]);
-		node = (t_node *)malloc(sizeof(t_node));
-		if ((num == 1 && !ft_is_one(split[i])) || !node)
+		if ((num == 1 && !ft_is_one(split[i])) || ft_check_duplicates(stack_a, num))
 			return (EXIT_FAILURE);
-		if (ft_check_duplicates(stack_a, num))
+		node = (t_node *)malloc(sizeof(t_node));
+		if (!node)
 			return (EXIT_FAILURE);
 		node->value = num;
 		node->next = NULL;

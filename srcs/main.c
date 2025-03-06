@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:26:06 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/03/06 14:44:48 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/03/06 17:13:22 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	main(int argc, char **argv)
 	else
 		split = argv + 1;
 	if (ft_is_return(argc, argv, &stack_a, split))
-		ft_error(&stack_a, &stack_b, NULL);
+		ft_error(&stack_a, &stack_b, split);
 	if (ft_issplit(argv[1]))
 		ft_free_split(split);
 	ft_push_swap(&stack_a, &stack_b);
