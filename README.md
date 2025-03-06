@@ -53,7 +53,7 @@ make
 ```
 例：
 ```
-ARG="5 2 1 4 3"; ./push_swap $ARG | ./checker $ARG
+ARG="5 2 1 4 3"; ./push_swap $ARG | ./checker_OS $ARG
 ```
 
 ---
@@ -95,4 +95,122 @@ ARG="5 2 1 4 3"; ./push_swap $ARG | ./checker $ARG
 
 ## ライセンス
 このプロジェクトは42Tokyoの課題の一部であり、教育目的で使用されます。再配布や商用利用は制限される場合があります。
+
+# Push_swap テストケース
+
+## 基本的なテストケース
+# 5個の数字のテスト
+ARG="5 2 1 4 3"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 3個の数字のテスト
+ARG="3 1 2"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 4個の数字のテスト
+ARG="4 1 3 2"; ./push_swap $ARG | ./checker_OS $ARG
+
+## より複雑なテストケース
+# 10個の数字のテスト
+ARG="10 7 5 3 8 2 9 1 6 4"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 重複を含まないランダムな数字のテスト（シェル関数を使用）
+ARG=`seq 1 100 | sort -R | head -n 20 | tr '\n' ' '`; ./push_swap $ARG | ./checker_OS $ARG
+
+## エッジケース
+# 既にソートされている配列
+ARG="1 2 3 4 5"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 逆順の配列
+ARG="5 4 3 2 1"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 負の数を含む配列
+ARG="-5 -2 0 3 1"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 大きな数値を含む配列
+ARG="2147483647 -2147483648 0 42 -42"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 同じような数値が近接している配列
+ARG="10000 10001 10002 9999 10003"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 大きな数値の差がある配列
+ARG="1000000 1 5000000 2 9999999"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 全て負の数の配列
+ARG="-5 -1 -4 -2 -3"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 2つの要素のみの配列
+ARG="2 1"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 1つの要素のみの配列
+ARG="42"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 大量の要素（100個）のテスト
+ARG=`seq 1 100 | sort -R | tr '\n' ' '`; ./push_swap $ARG | ./checker_OS $ARG
+
+# 大量の要素の操作回数確認
+ARG=`seq 1 100 | sort -R | tr '\n' ' '`; ./push_swap $ARG | wc -l
+
+# 特殊なパターン：交互に大小が並ぶ配列
+ARG="1 5 2 4 3"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 特殊なパターン：ほぼソート済みの配列（1要素のみ異なる）
+ARG="1 2 3 5 4"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 特殊なパターン：最大値が真ん中にある配列
+ARG="1 2 5 3 4"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 特殊なパターン：最小値が真ん中にある配列
+ARG="2 3 1 4 5"; ./push_swap $ARG | ./checker_OS $ARG
+
+## 中規模テストケース
+# 15個の数字のテスト
+ARG="15 7 3 12 19 4 8 11 1 13 5 17 9 2 6"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 20個の数字のテスト
+ARG="20 15 7 3 12 19 4 8 11 1 13 5 17 9 2 6 16 14 10 18"; ./push_swap $ARG | ./checker_OS $ARG
+
+## 特殊パターンテスト
+# フィボナッチ数列を含む配列
+ARG="1 1 2 3 5 8 13 21 34 55"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 素数のみの配列
+ARG="2 3 5 7 11 13 17 19 23 29"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 2の累乗の配列
+ARG="1 2 4 8 16 32 64 128 256 512"; ./push_swap $ARG | ./checker_OS $ARG
+
+## サイズ別テスト
+# 50個の要素テスト
+ARG=`seq 1 50 | sort -R | tr '\n' ' '`; ./push_swap $ARG | ./checker_OS $ARG
+
+# 75個の要素テスト
+ARG=`seq 1 75 | sort -R | tr '\n' ' '`; ./push_swap $ARG | ./checker_OS $ARG
+
+## パフォーマンステスト
+# 50個の要素の操作回数
+ARG=`seq 1 50 | sort -R | tr '\n' ' '`; ./push_swap $ARG | wc -l
+
+# 75個の要素の操作回数
+ARG=`seq 1 75 | sort -R | tr '\n' ' '`; ./push_swap $ARG | wc -l
+
+## 追加エッジケース
+# 3つおきに並んだ数列
+ARG="1 4 7 2 5 8 3 6 9"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 5つおきに並んだ数列
+ARG="1 6 11 16 2 7 12 17 3 8 13 18 4 9 14 19 5 10 15 20"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 前半昇順・後半降順の配列
+ARG="1 3 5 7 9 10 8 6 4 2"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 前半降順・後半昇順の配列
+ARG="9 7 5 3 1 2 4 6 8 10"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 真ん中を軸に対称な配列
+ARG="1 5 9 13 15 15 13 9 5 1"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 等差数列の配列
+ARG="2 4 6 8 10 12 14 16 18 20"; ./push_swap $ARG | ./checker_OS $ARG
+
+# 等比数列の配列
+ARG="1 3 9 27 81 243 729 2187"; ./push_swap $ARG | ./checker_OS $ARG
 
