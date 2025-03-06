@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:26:06 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/27 17:36:05 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/03/06 14:44:48 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int	main(int argc, char **argv)
 
 	if (argc == 1 || argv[1][0] == '\0')
 		return (EXIT_SUCCESS);
+	if (argc == 1 || argv[1][0] == '\0')
+		return (EXIT_SUCCESS);
 	ft_init(&stack_a, &stack_b);
 	if (ft_issplit(argv[1]) && argc != 2)
 		ft_error(&stack_a, &stack_b, NULL);
@@ -87,10 +89,7 @@ int	main(int argc, char **argv)
 	else
 		split = argv + 1;
 	if (ft_is_return(argc, argv, &stack_a, split))
-	{
-		ft_free_all(&stack_a, &stack_b, NULL);
-		return (EXIT_SUCCESS);
-	}
+		ft_error(&stack_a, &stack_b, NULL);
 	if (ft_issplit(argv[1]))
 		ft_free_split(split);
 	ft_push_swap(&stack_a, &stack_b);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+         #
+#    By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/08 13:21:51 by yabukirento       #+#    #+#              #
-#    Updated: 2024/09/27 17:57:30 by ryabuki          ###   ########.fr        #
+#    Updated: 2025/03/06 14:08:17 by yabukirento      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ LIBFT_DIR = ./srcs/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 NAME = push_swap
-CC = cc
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
