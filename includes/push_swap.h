@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 21:15:40 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/03/07 19:34:29 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/03/07 19:48:10 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,7 @@ void	ft_rra_time(t_stack **stack_a, int times);
 void	ft_rrb_time(t_stack **stack_b, int times);
 int		ft_pa_int(t_stack **stack_a, t_stack **stack_b);
 int		ft_pb_int(t_stack **stack_a, t_stack **stack_b);
+
+void	ft_rec_stop(t_stack **stack_a, t_stack **stack_b, int size, int flag);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/08 13:21:51 by yabukirento       #+#    #+#              #
-#    Updated: 2025/03/07 19:13:41 by yabukirento      ###   ########.fr        #
+#    Updated: 2025/03/07 19:47:36 by yabukirento      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS =	./srcs/required_functions/push.c \
 		./srcs/sort_small.c \
 		./srcs/sort_large.c \
 		./srcs/find_minmax.c \
+		./srcs/recursion_stop.c \
 
 OBJS = $(SRCS:.c=.o)
 

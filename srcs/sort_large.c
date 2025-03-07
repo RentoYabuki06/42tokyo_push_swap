@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 14:51:01 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/03/07 19:40:27 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/03/07 19:48:28 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,8 @@ void	ft_sort_quick_a(t_stack **stack_a, t_stack **stack_b, int size)
 	int	i;
 	int	pushed;
 
-	if (size <= 1)
-		return ;
-	if (size == 2 && (*stack_a)->top->value > (*stack_a)->top->next->value)
-		ft_sa(stack_a);
-	if (size == 2)
-		return ;
+	if (size <= 2)
+		return (ft_rec_stop(stack_a, stack_b, size, 0));
 	median = ft_get_median(stack_a, size);
 	i = 0;
 	pushed = 0;
@@ -96,12 +92,8 @@ void	ft_sort_quick_b(t_stack **stack_a, t_stack **stack_b, int size)
 	int	i;
 	int	pushed;
 
-	if (size <= 1)
-		return ;
-	if (size == 2 && (*stack_b)->top->value < (*stack_b)->top->next->value)
-		ft_sb(stack_b);
-	if (size == 2)
-		return ;
+	if (size <= 2)
+		return (ft_rec_stop(stack_a, stack_b, size, 1));
 	median = ft_get_median(stack_b, size);
 	i = 0;
 	pushed = 0;
