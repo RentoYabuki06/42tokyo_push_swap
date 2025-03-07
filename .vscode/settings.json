@@ -20,6 +20,24 @@
 		"system_error": "c",
 		"tuple": "c",
 		"type_traits": "c",
-		"vector": "c"
-	}
+		"vector": "c",
+		"__hash_table": "c",
+		"__split_buffer": "c",
+		"__tree": "c",
+		"array": "c",
+		"initializer_list": "c",
+		"list": "c",
+		"map": "c",
+		"queue": "c",
+		"set": "c",
+		"stack": "c",
+		"string": "c",
+		"string_view": "c",
+		"unordered_map": "c",
+		"unordered_set": "c",
+		"format": "c",
+		"span": "c",
+		"regex": "c"
+	},
+	"cmake.sourceDirectory": "/Users/yabukirento/Github/42tokyo/push_swap/push_swap_visualizer/build/_deps/catch2-src/.conan/test_package"
 }

@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 13:06:51 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/03/06 17:15:31 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/03/07 19:07:19 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ int	ft_fill(t_stack **stack_a, char **split)
 	while (split[i])
 	{
 		num = ft_atoi_ps(split[i]);
-		if ((num == 1 && !ft_is_one(split[i])) || ft_check_duplicates(stack_a, num))
+		if ((num == 1 && !ft_is_one(split[i])) \
+			|| ft_check_duplicates(stack_a, num))
 			return (EXIT_FAILURE);
 		node = (t_node *)malloc(sizeof(t_node));
 		if (!node)

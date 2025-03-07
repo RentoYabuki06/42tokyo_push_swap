@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:26:06 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/03/06 17:44:40 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/03/07 19:34:33 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,12 @@
 static void	ft_push_swap(t_stack **stack_a, t_stack **stack_b)
 {
 	int		size;
-	t_node	*top;
 
 	size = (*stack_a)->size;
-	top = (*stack_a)->top;
 	if (ft_is_sorted(stack_a))
 		return ;
-	else if (size == 2 && top->value > top->next->value)
-		ft_sa(stack_a);
-	else if (size == 2)
-		return ;
 	else if (size == 3)
-		ft_sort_three(stack_a, top->value, top->next->value);
+		ft_sort_three(stack_a);
 	else if (size == 4)
 		ft_sort_four(stack_a, stack_b);
 	else if (size == 5)

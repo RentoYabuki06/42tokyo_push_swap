@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 21:15:40 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/09/27 17:54:11 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/03/07 19:34:29 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	ft_rrb(t_stack **stack_b);
 void	ft_rrr(t_stack **stack_a, t_stack **stack_b);
 void	ft_rotate(t_stack **stack);
 
+int	ft_find_min(t_node *top);
+int	ft_find_max(t_node *top);
 void	ft_swap(t_stack **stack);
 bool	ft_is_one(char *s);
 t_stack	*ft_init_stack(void);
@@ -53,9 +55,12 @@ void	ft_init(t_stack **stack_a, t_stack **stack_b);
 int		ft_atoi_ps(char *s);
 int		ft_is_sorted(t_stack **stack);
 int		ft_fill(t_stack **stack_a, char **split);
-void	ft_sort_three(t_stack **stack, int first, int second);
+
+void	ft_sort_two(t_stack **stack);
+void	ft_sort_three(t_stack **stack_a);
 void	ft_sort_four(t_stack **stack_a, t_stack **stack_b);
 void	ft_sort_five(t_stack **stack_a, t_stack **stack_b);
+
 void	ft_error(t_stack **stack_a, t_stack **stack_b, char **split);
 void	ft_free_all(t_stack **stack_a, t_stack **stack_b, char **split);
 void	ft_free_split(char **split);

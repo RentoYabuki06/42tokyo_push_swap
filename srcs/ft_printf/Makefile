@@ -6,7 +6,7 @@
 #    By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:59:44 by yabukirento       #+#    #+#              #
-#    Updated: 2024/09/21 11:28:50 by yabukirento      ###   ########.fr        #
+#    Updated: 2025/03/07 19:11:09 by yabukirento      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS =	ft_itoa.c \
 OBJS = $(SRCS:.c=.o)
 
 NAME = libftprintf.a
-CC = cc
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
